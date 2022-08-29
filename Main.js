@@ -1,29 +1,40 @@
 import React from 'react';
-import SelectInput from './SelectInput';
-import PlayButton from './PlayButton';
+import SelectInput from '../components/SelectInput';
+import PlayButton from '../components/PlayButton';
 import './Main.css';
-import anagrams from './anagramJson';
+
 
 function Main(props) {
-    const answers = Object.keys(anagrams)
-
+    const operations = [
+        ['Addition', '+'],
+        ['Subtraction', '-'], 
+        ['Multiplication', 'x'],
+        ['Division', '/']
+    ];
+    const numbers = [];
+    for (let number = 2; number <= 100; number++) {
+        numbers.push([number, number]);
+    }
     return(
         <main>
             <div className="row mx-1 my-3">
-                <SelectInput style={{textAlign:'left'}} label="WORD LENGTH"
-                id="wordLength"
-                currentValue={props.wordLength} 
-                setCurrentValue={props.setWordLength}
-                values={answers} />
+                <SelectInput style={{textAlign:'left'}}label="OPERATION" id="operation" currentValue={props.operation} 
+                setCurrentValue={props.setOperation}
+                values={operations} />
             </div>
-            
-            <div style={{textAlign:'left'}}>
-                <h8>1. Choose .</h8><br />
-                <h8>2. Press <strong>Play!</strong></h8><br />
-                <h8>3. How many anagrams can you find in a minute?</h8>
+            <div className="row mx-1 my-3">
+                <SelectInput style={{textAlign:'left'}} label="MAX NUMBER" id="max-number" currentValue={props.maxNumber}
+                setCurrentValue={props.setMaxNumber}
+                values={numbers}/>
             </div>
             <div className="row mx-1 my-3">
                 <PlayButton />
+            </div>
+            <div style={{textAlign:'left'}}>
+                <h8>1. Choose Operation.</h8><br />
+                <h8>2. Choose Max Number.</h8><br />
+                <h8>3. Press Go.</h8><br />
+                <h8>4. How many problems can you solve in 30 seconds?</h8>
             </div>
         </main>
     )
